@@ -16,11 +16,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Asxcode\\LogShipper\\LogShipperServiceProvider"
-            ],
-            "aliases": {
-                "LogShipper": "Asxcode\\LogShipper\\Facades\\LogShipper"
-            }
+                "ArvindUmcasia\\LogShipper\\LogShipperServiceProvider"
+            ]
         }
     },
     "authors": [
