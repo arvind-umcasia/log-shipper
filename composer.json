@@ -10,7 +10,12 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php artisan vendor:publish --provider=\"ArvindUmcasia\\LogShipper\\LogShipperServiceProvider\" --tag=\"config\" --force"
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "@php artisan vendor:publish --provider=\"ArvindUmcasia\\LogShipper\\LogShipperServiceProvider\" --tag=\"config\" --force"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan vendor:publish --provider=\"ArvindUmcasia\\LogShipper\\LogShipperServiceProvider\" --tag=\"config\" --force"
         ]
     },
     "extra": {
