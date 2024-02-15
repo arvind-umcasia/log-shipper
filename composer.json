@@ -1,0 +1,34 @@
+{
+    "name": "arvind-umcasia/log-shipper",
+    "description": "A Laravel package for effortless and customizable transport of logs to external APIs, enhancing centralized log management.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ArvindUmcasia\\LogShipper\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php artisan vendor:publish --provider=\"ArvindUmcasia\\LogShipper\\LogShipperServiceProvider\" --tag=\"config\" --force"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Asxcode\\LogShipper\\LogShipperServiceProvider"
+            ],
+            "aliases": {
+                "LogShipper": "Asxcode\\LogShipper\\Facades\\LogShipper"
+            }
+        }
+    },
+    "authors": [
+        {
+            "name": "Arvind Suthar",
+            "email": "arvindsuthar198@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
