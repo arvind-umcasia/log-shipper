@@ -12,6 +12,10 @@ class LogShipLogger extends MonologLogger
     public function __construct($name, array $handlers = [], array $processors = [])
     {
         parent::__construct($name, $handlers, $processors);
+
+        // Only use "INFO", as of now : /
+        $logFile = $this->getLogFile("INFO");
+        $this->pushHandler(new StreamHandler($logFile, MonologLogger::INFO));        
     }
 
     public function log($level, $message, array $context = []): void
@@ -27,12 +31,6 @@ class LogShipLogger extends MonologLogger
 
         // Merge caller, request, and request ID information with context
         $context = array_merge($context, $callerInfo, $requestInfo, ['request_id' => $requestId]);
-
-        // Determine log file based on log level
-        $logFile = $this->getLogFile($level);
-
-        // Add StreamHandler for the determined log file
-        $this->pushHandler(new StreamHandler($logFile, $level));
 
         // Log the message
         parent::log($level, $message, $context);
@@ -74,21 +72,15 @@ class LogShipLogger extends MonologLogger
         }
     
         switch ($level) {
-            case MonologLogger::DEBUG:
+            case 'DEBUG':
                 return $logDirectory . '/debug.log';
-            case MonologLogger::INFO:
+            case 'INFO':
                 return $logDirectory . '/info.log';
-            case MonologLogger::NOTICE:
-                return $logDirectory . '/notice.log';
-            case MonologLogger::WARNING:
+            case 'WARNING':
                 return $logDirectory . '/warning.log';
-            case MonologLogger::ERROR:
+            case 'ERROR':
                 return $logDirectory . '/error.log';
-            case MonologLogger::CRITICAL:
-                return $logDirectory . '/critical.log';
-            case MonologLogger::ALERT:
-                return $logDirectory . '/alert.log';
-            case MonologLogger::EMERGENCY:
+            case 'EMERGENCY':
                 return $logDirectory . '/emergency.log';
             default:
                 return $logDirectory . '/debug.log';
